@@ -45,7 +45,7 @@
             this.lblGradeAtPointsStaticShoo = new System.Windows.Forms.Label();
             this.lblCalculateGradeStatic2Shoo = new System.Windows.Forms.Label();
             this.lblCalculateGradeStatic1Shoo = new System.Windows.Forms.Label();
-            this.tbxCalculateGradeShoo = new System.Windows.Forms.TextBox();
+            this.tbxPointAmountShoo = new System.Windows.Forms.TextBox();
             this.grbGradingMethodShoo.SuspendLayout();
             this.grbGradeOutputShoo.SuspendLayout();
             this.SuspendLayout();
@@ -109,7 +109,7 @@
             this.tbxCeasuraShoo.TabIndex = 1;
             this.tbxCeasuraShoo.Text = "5.5";
             this.tbxCeasuraShoo.TextChanged += new System.EventHandler(this.tbxCeasuraShoo_TextChanged);
-            this.tbxCeasuraShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCeasuraShoo_KeyPress);
+            this.tbxCeasuraShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateNumericKeyPressShoo);
             // 
             // lblCeasuraStaticShoo
             // 
@@ -129,7 +129,7 @@
             this.tbxMaxPointsShoo.TabIndex = 1;
             this.tbxMaxPointsShoo.Text = "10";
             this.tbxMaxPointsShoo.TextChanged += new System.EventHandler(this.tbxMaxPointsShoo_TextChanged);
-            this.tbxMaxPointsShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxMaxPointsShoo_KeyPress);
+            this.tbxMaxPointsShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateNumericKeyPressShoo);
             // 
             // lblMaxPointsStaticShoo
             // 
@@ -150,7 +150,7 @@
             this.grbGradeOutputShoo.Controls.Add(this.lblGradeAtPointsStaticShoo);
             this.grbGradeOutputShoo.Controls.Add(this.lblCalculateGradeStatic2Shoo);
             this.grbGradeOutputShoo.Controls.Add(this.lblCalculateGradeStatic1Shoo);
-            this.grbGradeOutputShoo.Controls.Add(this.tbxCalculateGradeShoo);
+            this.grbGradeOutputShoo.Controls.Add(this.tbxPointAmountShoo);
             this.grbGradeOutputShoo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbGradeOutputShoo.Location = new System.Drawing.Point(12, 96);
             this.grbGradeOutputShoo.Name = "grbGradeOutputShoo";
@@ -232,16 +232,16 @@
             this.lblCalculateGradeStatic1Shoo.TabIndex = 0;
             this.lblCalculateGradeStatic1Shoo.Text = "Calculate grade";
             // 
-            // tbxCalculateGradeShoo
+            // tbxPointAmountShoo
             // 
-            this.tbxCalculateGradeShoo.Location = new System.Drawing.Point(6, 66);
-            this.tbxCalculateGradeShoo.MaxLength = 6;
-            this.tbxCalculateGradeShoo.Name = "tbxCalculateGradeShoo";
-            this.tbxCalculateGradeShoo.Size = new System.Drawing.Size(117, 24);
-            this.tbxCalculateGradeShoo.TabIndex = 1;
-            this.tbxCalculateGradeShoo.Text = "10";
-            this.tbxCalculateGradeShoo.TextChanged += new System.EventHandler(this.tbxCalculateGradeShoo_TextChanged);
-            this.tbxCalculateGradeShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCalculateGradeShoo_KeyPress);
+            this.tbxPointAmountShoo.Location = new System.Drawing.Point(6, 66);
+            this.tbxPointAmountShoo.MaxLength = 6;
+            this.tbxPointAmountShoo.Name = "tbxPointAmountShoo";
+            this.tbxPointAmountShoo.Size = new System.Drawing.Size(117, 24);
+            this.tbxPointAmountShoo.TabIndex = 1;
+            this.tbxPointAmountShoo.Text = "10";
+            this.tbxPointAmountShoo.TextChanged += new System.EventHandler(this.tbxPointAmountShoo_TextChanged);
+            this.tbxPointAmountShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateNumericKeyPressShoo);
             // 
             // frmGradeCalculatorShoo
             // 
@@ -278,7 +278,7 @@
         private System.Windows.Forms.Label lblPointsStaticShoo;
         private System.Windows.Forms.Label lblGradeAtPointsStaticShoo;
         private System.Windows.Forms.Label lblCalculateGradeStatic2Shoo;
-        private System.Windows.Forms.TextBox tbxCalculateGradeShoo;
+        private System.Windows.Forms.TextBox tbxPointAmountShoo;
         private System.Windows.Forms.Label lblPointsShoo;
         private System.Windows.Forms.Button btnGeneratePdfShoo;
         private System.Windows.Forms.Label lblGradeShoo;

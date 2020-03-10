@@ -24,15 +24,17 @@ namespace GradeCalculator.Services
             // Check max points < ceasura
             if (maxPoints < ceasura)
             {
-                System.Windows.Forms.MessageBox.Show("Tried to remake linear formula, but ceasure is bigger than maximum points! Cancelling remake...", "Whoops!");
                 Console.WriteLine("Error: Tried to remake linear formula, but ceasure is bigger than maximum points! Cancelling remake...");
+                multiplier1Shoo = 0;
+                multiplier2Shoo = 0;
                 return;
             }
             // Check ceasura bigger then 0
             else if (ceasura <= 0)
             {
-                System.Windows.Forms.MessageBox.Show("Tried to remake linear formula, but ceasure smaller then or equal to 0! Cancelling remake...", "Whoops!");
                 Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller then or equal to 0! Cancelling remake...");
+                multiplier1Shoo = 0;
+                multiplier2Shoo = 0;
                 return;
             }
 
@@ -49,13 +51,17 @@ namespace GradeCalculator.Services
 
         public float GetGradeShoo(float points)
         {
+            // Invalid formula, return 0
+            if (multiplier1Shoo == 0 || multiplier2Shoo == 0)
+                return 0;
+
             // Return point from formula below ceasura
             if (points >= startPointShoo.X && points <= ceasuraPointShoo.X)
                 return multiplier1Shoo * points + startPointShoo.Y;
 
             // Return point from formula above ceasure
             else if (points >= ceasuraPointShoo.X && points <= maxPointShoo.X)
-                return multiplier2Shoo * points + ceasuraPointShoo.Y;
+                return multiplier2Shoo * (points - ceasuraPointShoo.Y) + ceasuraPointShoo.Y;
 
             // Invalid grade, return 0
             return 0;
@@ -66,21 +72,26 @@ namespace GradeCalculator.Services
             // Create a grade list
             List<GradeListItem> gradeListShoo = new List<GradeListItem>();
 
+            // Invalid formula, return 0
+            if (multiplier1Shoo == 0 || multiplier2Shoo == 0)
+                return gradeListShoo;
+
             // Fill grade list with each tenth grade's minimum needed points
-            for (float gradeShoo = 1; gradeShoo <= 10; gradeShoo += 0.1F)
+            for (int indexShoo = 10; indexShoo <= 100; indexShoo++)
             {
                 float minimumPointsShoo;
+                float gradeShoo = (float)indexShoo / 10;
 
                 // Calculate points below ceasura
                 if (gradeShoo <= ceasuraPointShoo.Y)
-                    minimumPointsShoo = (gradeShoo - startPointShoo.Y) / multiplier1Shoo;
+                    minimumPointsShoo = (gradeShoo - startPointShoo.Y) / multiplier1Shoo + startPointShoo.Y;
 
                 // Calculate points above ceasura
                 else
-                    minimumPointsShoo = (gradeShoo - ceasuraPointShoo.Y) / multiplier2Shoo;
+                    minimumPointsShoo = (gradeShoo - ceasuraPointShoo.Y) / multiplier2Shoo + ceasuraPointShoo.Y;
 
                 // Add grade and minimum points to list
-                gradeListShoo.Add(new GradeListItem(gradeShoo, minimumPointsShoo));
+                gradeListShoo.Add(new GradeListItem(gradeShoo.ToString("0.0"), minimumPointsShoo.ToString("0.0")));
             }
 
             // Return grade list

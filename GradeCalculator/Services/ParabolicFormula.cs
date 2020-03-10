@@ -1,5 +1,7 @@
 ﻿using GradeCalculator.Interfaces;
 using GradeCalculator.Structs;
+using System;
+using System.Collections.Generic;
 
 namespace GradeCalculator.Services
 {
@@ -12,16 +14,29 @@ namespace GradeCalculator.Services
         /// <summary>The maximum point of formula, only X will vary.</summary>
         Point maxPointShoo = new Point(10, 10);
 
-        /// <summary>
-        /// Remake Shoo.
-        /// Remakes parabolic formula based on max points and ceasure.
-        /// </summary>
-        /// <param name="maxPoints"></param>
-        /// <param name="ceasure"></param>
-        private void RemakeShoo(float maxPoints, float ceasure)
+        public void RemakeShoo(float maxPoints, float ceasura)
         {
-            ceasuraPointShoo.X = ceasure;
-            maxPointShoo.X = maxPoints;
+
+        }
+
+        public float GetGradeShoo(float points)
+        {
+            return 0;
+        }
+
+        public List<GradeListItem> GetGradeListShoo()
+        {
+            // Create a grade list
+            List<GradeListItem> gradeListShoo = new List<GradeListItem>();
+
+            // Fill grade list with each tenth grade's minimum needed points
+            for (int indexShoo = 10; indexShoo <= 100; indexShoo++)
+            {
+
+            }
+
+            // Return grade list
+            return gradeListShoo;
         }
     }
 }
