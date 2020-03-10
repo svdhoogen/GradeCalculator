@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using GradeCalculator.Enums;
+using GradeCalculator.Interfaces;
+using System;
 using System.Windows.Forms;
 
 namespace GradeCalculator
@@ -7,8 +10,8 @@ namespace GradeCalculator
     {
         #region Variable declarations
 
-        ParabolicFormula parabolicFormulaShoo = new ParabolicFormula();
-        LinearFormula linearFormulaShoo = new LinearFormula();
+        readonly IParabolicFormula parabolicFormulaShoo = ClassContainer.Container.Resolve<IParabolicFormula>();
+        readonly ILinearFormula linearFormulaShoo = ClassContainer.Container.Resolve<ILinearFormula>();
 
         GradingMethodEnum gradingMethodShoo = GradingMethodEnum.Linear;
         float maxPointsShoo = 10;
@@ -45,7 +48,7 @@ namespace GradeCalculator
             // On enter, attempt to calculate parabola
             if (e.KeyChar == '\r')
             {
-                RemakeFormula();
+                RemakeFormulasShoo();
             }
         }
 
@@ -67,7 +70,7 @@ namespace GradeCalculator
             // On enter, attempt to calculate parabola
             if (e.KeyChar == '\r')
             {
-                RemakeFormula();
+                RemakeFormulasShoo();
             }
         }
 
@@ -82,7 +85,7 @@ namespace GradeCalculator
             if (!rdbLinearShoo.Checked)
             {
                 gradingMethodShoo = GradingMethodEnum.Linear;
-                RemakeFormula();
+                RemakeFormulasShoo();
             }
         }
 
@@ -97,7 +100,7 @@ namespace GradeCalculator
             if (!rdbLinearShoo.Checked)
             {
                 gradingMethodShoo = GradingMethodEnum.Parabola;
-                RemakeFormula();
+                RemakeFormulasShoo();
             }
         }
 
@@ -123,7 +126,7 @@ namespace GradeCalculator
 
         private void btnGeneratePdfShoo_Click(object sender, EventArgs e)
         {
-
+            Console.WriteLine(linearFormulaShoo.GetGradeListShoo());
         }
 
         #endregion
@@ -134,9 +137,10 @@ namespace GradeCalculator
         /// Remake Formula Shoo.
         /// Remakes the formula based on max points, ceasura and grading method.
         /// </summary>
-        private void RemakeFormulaShoo()
+        private void RemakeFormulasShoo()
         {
-
+            //parabolicFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
+            linearFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
         }
 
         /// <summary>
