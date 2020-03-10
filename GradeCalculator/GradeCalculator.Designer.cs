@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             this.grbGradingMethodShoo = new System.Windows.Forms.GroupBox();
+            this.rdbParabolaShoo = new System.Windows.Forms.RadioButton();
+            this.rdbLinearShoo = new System.Windows.Forms.RadioButton();
+            this.lblGradeMethodStaticShoo = new System.Windows.Forms.Label();
+            this.tbxCeasuraShoo = new System.Windows.Forms.TextBox();
+            this.lblCeasuraStaticShoo = new System.Windows.Forms.Label();
+            this.tbxMaxPointsShoo = new System.Windows.Forms.TextBox();
+            this.lblMaxPointsStaticShoo = new System.Windows.Forms.Label();
             this.grbGradeOutputShoo = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGeneratePdfShoo = new System.Windows.Forms.Button();
+            this.lblGradeShoo = new System.Windows.Forms.Label();
+            this.lblPointsShoo = new System.Windows.Forms.Label();
+            this.lblGradeStaticShoo = new System.Windows.Forms.Label();
+            this.lblPointsStaticShoo = new System.Windows.Forms.Label();
+            this.lblGradeAtPointsStaticShoo = new System.Windows.Forms.Label();
+            this.lblCalculateGradeStatic2Shoo = new System.Windows.Forms.Label();
+            this.lblCalculateGradeStatic1Shoo = new System.Windows.Forms.Label();
+            this.tbxCalculateGradeShoo = new System.Windows.Forms.TextBox();
             this.grbGradingMethodShoo.SuspendLayout();
             this.grbGradeOutputShoo.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbGradingMethodShoo
             // 
-            this.grbGradingMethodShoo.Controls.Add(this.radioButton2);
-            this.grbGradingMethodShoo.Controls.Add(this.radioButton1);
-            this.grbGradingMethodShoo.Controls.Add(this.label3);
-            this.grbGradingMethodShoo.Controls.Add(this.textBox2);
-            this.grbGradingMethodShoo.Controls.Add(this.label2);
-            this.grbGradingMethodShoo.Controls.Add(this.textBox1);
-            this.grbGradingMethodShoo.Controls.Add(this.label1);
+            this.grbGradingMethodShoo.Controls.Add(this.rdbParabolaShoo);
+            this.grbGradingMethodShoo.Controls.Add(this.rdbLinearShoo);
+            this.grbGradingMethodShoo.Controls.Add(this.lblGradeMethodStaticShoo);
+            this.grbGradingMethodShoo.Controls.Add(this.tbxCeasuraShoo);
+            this.grbGradingMethodShoo.Controls.Add(this.lblCeasuraStaticShoo);
+            this.grbGradingMethodShoo.Controls.Add(this.tbxMaxPointsShoo);
+            this.grbGradingMethodShoo.Controls.Add(this.lblMaxPointsStaticShoo);
             this.grbGradingMethodShoo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbGradingMethodShoo.Location = new System.Drawing.Point(12, 12);
             this.grbGradingMethodShoo.Name = "grbGradingMethodShoo";
@@ -67,17 +67,90 @@
             this.grbGradingMethodShoo.TabStop = false;
             this.grbGradingMethodShoo.Text = "Grading method";
             // 
+            // rdbParabolaShoo
+            // 
+            this.rdbParabolaShoo.AutoSize = true;
+            this.rdbParabolaShoo.Location = new System.Drawing.Point(430, 49);
+            this.rdbParabolaShoo.Name = "rdbParabolaShoo";
+            this.rdbParabolaShoo.Size = new System.Drawing.Size(85, 22);
+            this.rdbParabolaShoo.TabIndex = 4;
+            this.rdbParabolaShoo.Text = "Parabola";
+            this.rdbParabolaShoo.UseVisualStyleBackColor = true;
+            this.rdbParabolaShoo.CheckedChanged += new System.EventHandler(this.rdbParabolaShoo_CheckedChanged);
+            // 
+            // rdbLinearShoo
+            // 
+            this.rdbLinearShoo.AutoSize = true;
+            this.rdbLinearShoo.Checked = true;
+            this.rdbLinearShoo.Location = new System.Drawing.Point(341, 49);
+            this.rdbLinearShoo.Name = "rdbLinearShoo";
+            this.rdbLinearShoo.Size = new System.Drawing.Size(66, 22);
+            this.rdbLinearShoo.TabIndex = 3;
+            this.rdbLinearShoo.TabStop = true;
+            this.rdbLinearShoo.Text = "Linear";
+            this.rdbLinearShoo.UseVisualStyleBackColor = true;
+            this.rdbLinearShoo.CheckedChanged += new System.EventHandler(this.rdbLinearShoo_CheckedChanged);
+            // 
+            // lblGradeMethodStaticShoo
+            // 
+            this.lblGradeMethodStaticShoo.AutoSize = true;
+            this.lblGradeMethodStaticShoo.Location = new System.Drawing.Point(338, 28);
+            this.lblGradeMethodStaticShoo.Name = "lblGradeMethodStaticShoo";
+            this.lblGradeMethodStaticShoo.Size = new System.Drawing.Size(177, 18);
+            this.lblGradeMethodStaticShoo.TabIndex = 2;
+            this.lblGradeMethodStaticShoo.Text = "Grade calculation method";
+            // 
+            // tbxCeasuraShoo
+            // 
+            this.tbxCeasuraShoo.Location = new System.Drawing.Point(174, 48);
+            this.tbxCeasuraShoo.MaxLength = 6;
+            this.tbxCeasuraShoo.Name = "tbxCeasuraShoo";
+            this.tbxCeasuraShoo.Size = new System.Drawing.Size(117, 24);
+            this.tbxCeasuraShoo.TabIndex = 1;
+            this.tbxCeasuraShoo.Text = "5.5";
+            this.tbxCeasuraShoo.TextChanged += new System.EventHandler(this.tbxCeasuraShoo_TextChanged);
+            this.tbxCeasuraShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCeasuraShoo_KeyPress);
+            // 
+            // lblCeasuraStaticShoo
+            // 
+            this.lblCeasuraStaticShoo.AutoSize = true;
+            this.lblCeasuraStaticShoo.Location = new System.Drawing.Point(171, 27);
+            this.lblCeasuraStaticShoo.Name = "lblCeasuraStaticShoo";
+            this.lblCeasuraStaticShoo.Size = new System.Drawing.Size(64, 18);
+            this.lblCeasuraStaticShoo.TabIndex = 0;
+            this.lblCeasuraStaticShoo.Text = "Ceasura";
+            // 
+            // tbxMaxPointsShoo
+            // 
+            this.tbxMaxPointsShoo.Location = new System.Drawing.Point(6, 48);
+            this.tbxMaxPointsShoo.MaxLength = 6;
+            this.tbxMaxPointsShoo.Name = "tbxMaxPointsShoo";
+            this.tbxMaxPointsShoo.Size = new System.Drawing.Size(117, 24);
+            this.tbxMaxPointsShoo.TabIndex = 1;
+            this.tbxMaxPointsShoo.Text = "10";
+            this.tbxMaxPointsShoo.TextChanged += new System.EventHandler(this.tbxMaxPointsShoo_TextChanged);
+            this.tbxMaxPointsShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxMaxPointsShoo_KeyPress);
+            // 
+            // lblMaxPointsStaticShoo
+            // 
+            this.lblMaxPointsStaticShoo.AutoSize = true;
+            this.lblMaxPointsStaticShoo.Location = new System.Drawing.Point(6, 27);
+            this.lblMaxPointsStaticShoo.Name = "lblMaxPointsStaticShoo";
+            this.lblMaxPointsStaticShoo.Size = new System.Drawing.Size(117, 18);
+            this.lblMaxPointsStaticShoo.TabIndex = 0;
+            this.lblMaxPointsStaticShoo.Text = "Maximum points";
+            // 
             // grbGradeOutputShoo
             // 
-            this.grbGradeOutputShoo.Controls.Add(this.button1);
-            this.grbGradeOutputShoo.Controls.Add(this.label10);
-            this.grbGradeOutputShoo.Controls.Add(this.label9);
-            this.grbGradeOutputShoo.Controls.Add(this.label8);
-            this.grbGradeOutputShoo.Controls.Add(this.label7);
-            this.grbGradeOutputShoo.Controls.Add(this.label6);
-            this.grbGradeOutputShoo.Controls.Add(this.label5);
-            this.grbGradeOutputShoo.Controls.Add(this.label4);
-            this.grbGradeOutputShoo.Controls.Add(this.textBox3);
+            this.grbGradeOutputShoo.Controls.Add(this.btnGeneratePdfShoo);
+            this.grbGradeOutputShoo.Controls.Add(this.lblGradeShoo);
+            this.grbGradeOutputShoo.Controls.Add(this.lblPointsShoo);
+            this.grbGradeOutputShoo.Controls.Add(this.lblGradeStaticShoo);
+            this.grbGradeOutputShoo.Controls.Add(this.lblPointsStaticShoo);
+            this.grbGradeOutputShoo.Controls.Add(this.lblGradeAtPointsStaticShoo);
+            this.grbGradeOutputShoo.Controls.Add(this.lblCalculateGradeStatic2Shoo);
+            this.grbGradeOutputShoo.Controls.Add(this.lblCalculateGradeStatic1Shoo);
+            this.grbGradeOutputShoo.Controls.Add(this.tbxCalculateGradeShoo);
             this.grbGradeOutputShoo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbGradeOutputShoo.Location = new System.Drawing.Point(12, 96);
             this.grbGradeOutputShoo.Name = "grbGradeOutputShoo";
@@ -86,161 +159,99 @@
             this.grbGradeOutputShoo.TabStop = false;
             this.grbGradeOutputShoo.Text = "Grade output";
             // 
-            // label1
+            // btnGeneratePdfShoo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Maximum points";
+            this.btnGeneratePdfShoo.Location = new System.Drawing.Point(341, 23);
+            this.btnGeneratePdfShoo.Name = "btnGeneratePdfShoo";
+            this.btnGeneratePdfShoo.Size = new System.Drawing.Size(174, 64);
+            this.btnGeneratePdfShoo.TabIndex = 6;
+            this.btnGeneratePdfShoo.Text = "Generate PDF";
+            this.btnGeneratePdfShoo.UseVisualStyleBackColor = true;
+            this.btnGeneratePdfShoo.Click += new System.EventHandler(this.btnGeneratePdfShoo_Click);
             // 
-            // textBox1
+            // lblGradeShoo
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 48);
-            this.textBox1.MaxLength = 9;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(117, 24);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "10";
+            this.lblGradeShoo.AutoSize = true;
+            this.lblGradeShoo.Location = new System.Drawing.Point(231, 69);
+            this.lblGradeShoo.Name = "lblGradeShoo";
+            this.lblGradeShoo.Size = new System.Drawing.Size(24, 18);
+            this.lblGradeShoo.TabIndex = 5;
+            this.lblGradeShoo.Text = "10";
             // 
-            // textBox2
+            // lblPointsShoo
             // 
-            this.textBox2.Location = new System.Drawing.Point(174, 48);
-            this.textBox2.MaxLength = 9;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(117, 24);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "5.5";
+            this.lblPointsShoo.AutoSize = true;
+            this.lblPointsShoo.Location = new System.Drawing.Point(231, 46);
+            this.lblPointsShoo.Name = "lblPointsShoo";
+            this.lblPointsShoo.Size = new System.Drawing.Size(24, 18);
+            this.lblPointsShoo.TabIndex = 5;
+            this.lblPointsShoo.Text = "10";
             // 
-            // label2
+            // lblGradeStaticShoo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(171, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 18);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Ceasura";
+            this.lblGradeStaticShoo.AutoSize = true;
+            this.lblGradeStaticShoo.Location = new System.Drawing.Point(171, 69);
+            this.lblGradeStaticShoo.Name = "lblGradeStaticShoo";
+            this.lblGradeStaticShoo.Size = new System.Drawing.Size(53, 18);
+            this.lblGradeStaticShoo.TabIndex = 4;
+            this.lblGradeStaticShoo.Text = "Grade:";
             // 
-            // label3
+            // lblPointsStaticShoo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(338, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(177, 18);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Grade calculation method";
+            this.lblPointsStaticShoo.AutoSize = true;
+            this.lblPointsStaticShoo.Location = new System.Drawing.Point(171, 45);
+            this.lblPointsStaticShoo.Name = "lblPointsStaticShoo";
+            this.lblPointsStaticShoo.Size = new System.Drawing.Size(54, 18);
+            this.lblPointsStaticShoo.TabIndex = 3;
+            this.lblPointsStaticShoo.Text = "Points:";
             // 
-            // radioButton1
+            // lblGradeAtPointsStaticShoo
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(341, 49);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(66, 22);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Linear";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.lblGradeAtPointsStaticShoo.AutoSize = true;
+            this.lblGradeAtPointsStaticShoo.Location = new System.Drawing.Point(171, 20);
+            this.lblGradeAtPointsStaticShoo.Name = "lblGradeAtPointsStaticShoo";
+            this.lblGradeAtPointsStaticShoo.Size = new System.Drawing.Size(125, 18);
+            this.lblGradeAtPointsStaticShoo.TabIndex = 2;
+            this.lblGradeAtPointsStaticShoo.Text = "Grade at # points:";
             // 
-            // radioButton2
+            // lblCalculateGradeStatic2Shoo
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(430, 49);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(85, 22);
-            this.radioButton2.TabIndex = 4;
-            this.radioButton2.Text = "Parabola";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.lblCalculateGradeStatic2Shoo.AutoSize = true;
+            this.lblCalculateGradeStatic2Shoo.Location = new System.Drawing.Point(6, 45);
+            this.lblCalculateGradeStatic2Shoo.Name = "lblCalculateGradeStatic2Shoo";
+            this.lblCalculateGradeStatic2Shoo.Size = new System.Drawing.Size(76, 18);
+            this.lblCalculateGradeStatic2Shoo.TabIndex = 0;
+            this.lblCalculateGradeStatic2Shoo.Text = "at # points";
             // 
-            // label4
+            // lblCalculateGradeStatic1Shoo
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 27);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 18);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Calculate grade";
+            this.lblCalculateGradeStatic1Shoo.AutoSize = true;
+            this.lblCalculateGradeStatic1Shoo.Location = new System.Drawing.Point(6, 27);
+            this.lblCalculateGradeStatic1Shoo.Name = "lblCalculateGradeStatic1Shoo";
+            this.lblCalculateGradeStatic1Shoo.Size = new System.Drawing.Size(110, 18);
+            this.lblCalculateGradeStatic1Shoo.TabIndex = 0;
+            this.lblCalculateGradeStatic1Shoo.Text = "Calculate grade";
             // 
-            // textBox3
+            // tbxCalculateGradeShoo
             // 
-            this.textBox3.Location = new System.Drawing.Point(6, 66);
-            this.textBox3.MaxLength = 9;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(117, 24);
-            this.textBox3.TabIndex = 1;
-            this.textBox3.Text = "10";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 18);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "at # points";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(171, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(125, 18);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Grade at # points:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(171, 45);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 18);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Points:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(171, 69);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 18);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Grade:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(231, 45);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(20, 18);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "...";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(230, 69);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(20, 18);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "...";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(329, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 64);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Generate PDF";
-            this.button1.UseVisualStyleBackColor = true;
+            this.tbxCalculateGradeShoo.Location = new System.Drawing.Point(6, 66);
+            this.tbxCalculateGradeShoo.MaxLength = 6;
+            this.tbxCalculateGradeShoo.Name = "tbxCalculateGradeShoo";
+            this.tbxCalculateGradeShoo.Size = new System.Drawing.Size(117, 24);
+            this.tbxCalculateGradeShoo.TabIndex = 1;
+            this.tbxCalculateGradeShoo.Text = "10";
+            this.tbxCalculateGradeShoo.TextChanged += new System.EventHandler(this.tbxCalculateGradeShoo_TextChanged);
+            this.tbxCalculateGradeShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCalculateGradeShoo_KeyPress);
             // 
             // frmGradeCalculatorShoo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(545, 207);
             this.Controls.Add(this.grbGradeOutputShoo);
             this.Controls.Add(this.grbGradingMethodShoo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmGradeCalculatorShoo";
             this.Text = "Grade Calculator";
             this.grbGradingMethodShoo.ResumeLayout(false);
@@ -254,23 +265,23 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grbGradingMethodShoo;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbxMaxPointsShoo;
+        private System.Windows.Forms.Label lblMaxPointsStaticShoo;
         private System.Windows.Forms.GroupBox grbGradeOutputShoo;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.RadioButton rdbParabolaShoo;
+        private System.Windows.Forms.RadioButton rdbLinearShoo;
+        private System.Windows.Forms.Label lblGradeMethodStaticShoo;
+        private System.Windows.Forms.TextBox tbxCeasuraShoo;
+        private System.Windows.Forms.Label lblCeasuraStaticShoo;
+        private System.Windows.Forms.Label lblCalculateGradeStatic1Shoo;
+        private System.Windows.Forms.Label lblGradeStaticShoo;
+        private System.Windows.Forms.Label lblPointsStaticShoo;
+        private System.Windows.Forms.Label lblGradeAtPointsStaticShoo;
+        private System.Windows.Forms.Label lblCalculateGradeStatic2Shoo;
+        private System.Windows.Forms.TextBox tbxCalculateGradeShoo;
+        private System.Windows.Forms.Label lblPointsShoo;
+        private System.Windows.Forms.Button btnGeneratePdfShoo;
+        private System.Windows.Forms.Label lblGradeShoo;
     }
 }
 

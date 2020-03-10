@@ -52,6 +52,7 @@
     <Compile Include="GradeCalculator.Designer.cs">
       <DependentUpon>GradeCalculator.cs</DependentUpon>
     </Compile>
+    <Compile Include="GradingMethodEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GradeCalculator.resx">
