@@ -181,6 +181,8 @@ namespace GradeCalculator
         /// </summary>
         private void RemakeFormulasShoo()
         {
+            Console.WriteLine($"Remaking formulas based on: Max points: { maxPointsShoo }, ceasura: { ceasuraShoo }, grading method: { gradingMethodShoo }");
+
             //parabolicFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
             linearFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
 
@@ -217,6 +219,39 @@ namespace GradeCalculator
         }
 
         /// <summary>
+        /// Parse Text Box Float Shoo.
+        /// Replaces empty text box with '0', trims trailing 0's.
+        /// </summary>
+        /// <param name="textBoxShoo">Text box to parse</param>
+        private float ParseTextBoxFloatShoo(TextBox textBoxShoo)
+        {
+            try
+            {
+                // Format text box
+                FormatTextBoxFloatShoo(textBoxShoo);
+
+                // Check if valid number
+                if (string.IsNullOrWhiteSpace(textBoxShoo.Text) || textBoxShoo.Text == "0" || textBoxShoo.Text == ".")
+                    return 0;
+
+                // Parse text
+                float.TryParse(textBoxShoo.Text, out float parsedFloatShoo);
+
+                // Log error
+                if (parsedFloatShoo == 0)
+                    Console.WriteLine("Error: Tried to parse numeric text box float, but try parse returned 0!");
+
+                // return float
+               return parsedFloatShoo;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Critical error: Crashed unexpectedly while validating numeric textbox input! " + ex);
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Format Text Box Float Shoo.
         /// Replaces empty text box with '0', trims leading 0's.
         /// </summary>
@@ -236,39 +271,6 @@ namespace GradeCalculator
                 textBoxShoo.Text = textBoxShoo.Text.TrimStart('0');
                 textBoxShoo.SelectionStart = textBoxShoo.Text.Length;
                 textBoxShoo.SelectionLength = 0;
-            }
-        }
-
-        /// <summary>
-        /// Parse Text Box Float Shoo.
-        /// Replaces empty text box with '0', trims trailing 0's.
-        /// </summary>
-        /// <param name="textBoxShoo">Text box to parse</param>
-        private float ParseTextBoxFloatShoo(TextBox textBoxShoo)
-        {
-            try
-            {
-                // Format text box
-                FormatTextBoxFloatShoo(textBoxShoo);
-
-                // Check if valid number
-                if (string.IsNullOrWhiteSpace(textBoxShoo.Text) || textBoxShoo.Text == "0" || textBoxShoo.Text == ".")
-                    return 0;
-
-                // Parse text
-                float.TryParse(tbxPointAmountShoo.Text, out float parsedFloatShoo);
-
-                // Log error
-                if (parsedFloatShoo == 0)
-                    Console.WriteLine("Error: Tried to parse numeric text box float, but try parse returned 0!");
-
-                // return float
-                return parsedFloatShoo;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Critical error: Crashed unexpectedly while validating numeric textbox input! " + ex);
-                return 0;
             }
         }
 
