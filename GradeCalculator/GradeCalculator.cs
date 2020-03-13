@@ -34,6 +34,8 @@ namespace GradeCalculator
         public frmGradeCalculatorShoo()
         {
             InitializeComponent();
+
+            RemakeFormulasShoo();
         }
 
         #endregion
@@ -183,8 +185,8 @@ namespace GradeCalculator
         {
             Console.WriteLine($"Remaking formulas based on: Max points: { maxPointsShoo }, ceasura: { ceasuraShoo }, grading method: { gradingMethodShoo }");
 
-            //parabolicFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
             brokenLineFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
+            parabolicFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
 
             // Update grade
             UpdateGradeShoo();

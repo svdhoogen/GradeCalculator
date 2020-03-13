@@ -17,9 +17,9 @@ namespace GradeCalculator.Services
         Point endPointShoo = new Point(-1, 10);
 
         /// <summary>Multiplier (a) for formula below ceasure.</summary>
-        float multiplier1Shoo = 1;
+        float multiplier1Shoo = -1;
         /// <summary>Multiplier (a) for formula above ceasure.</summary>
-        float multiplier2Shoo = 1;
+        float multiplier2Shoo = -1;
 
         public void RemakeShoo(float maxPoints, float ceasura)
         {
@@ -27,16 +27,16 @@ namespace GradeCalculator.Services
             if (maxPoints < ceasura)
             {
                 Console.WriteLine("Error: Tried to remake linear formula, but ceasure is larger than maximum points! Cancelling remake...");
-                multiplier1Shoo = 0;
-                multiplier2Shoo = 0;
+                multiplier1Shoo = -1;
+                multiplier2Shoo = -1;
                 return;
             }
             // Check ceasura bigger than 0
             else if (ceasura <= 0)
             {
                 Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 0! Cancelling remake...");
-                multiplier1Shoo = 0;
-                multiplier2Shoo = 0;
+                multiplier1Shoo = -1;
+                multiplier2Shoo = -1;
                 return;
             }
 
@@ -57,14 +57,14 @@ namespace GradeCalculator.Services
         public float GetGradeShoo(float points)
         {
             // Invalid formula, return 0
-            if (multiplier1Shoo == 0 || multiplier2Shoo == 0)
+            if (multiplier1Shoo <= 0 || multiplier2Shoo <= 0)
                 return 0;
 
-            // Return point from formula 1, below ceasura
+            // Return grade from formula 1, below ceasura
             if (points >= startPoint1Shoo.X && points <= breakPointShoo.X)
                 return multiplier1Shoo * points + startPoint1Shoo.Y;
 
-            // Return point from formula 2, above ceasure
+            // Return grade from formula 2, above ceasure
             else if (points >= breakPointShoo.X && points <= endPointShoo.X)
                 return multiplier2Shoo * points + startPoint2Shoo.Y;
 
@@ -77,8 +77,8 @@ namespace GradeCalculator.Services
             // Create grade list
             List<GradeListItem> gradeListShoo = new List<GradeListItem>();
 
-            // Invalid formula, return 0
-            if (multiplier1Shoo == 0 || multiplier2Shoo == 0)
+            // Invalid formula, return empty list
+            if (multiplier1Shoo <= 0 || multiplier2Shoo <= 0)
                 return gradeListShoo;
 
             // Foreach grade, get minimum points needed and add to list

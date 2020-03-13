@@ -70,7 +70,7 @@
     <Compile Include="Interfaces\IParabolicFormula.cs" />
     <Compile Include="Structs\GradeListItem.cs" />
     <Compile Include="Enums\GradingMethodEnum.cs" />
-    <Compile Include="Services\LinearFormula.cs" />
+    <Compile Include="Services\BrokenLineFormula.cs" />
     <Compile Include="Services\ParabolicFormula.cs" />
     <Compile Include="Structs\Point.cs" />
     <Compile Include="Program.cs" />
