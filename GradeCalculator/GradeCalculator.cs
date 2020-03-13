@@ -15,7 +15,7 @@ namespace GradeCalculator
         /// <summary>The parabolic formula for calculating grades.</summary>
         readonly IParabolicFormula parabolicFormulaShoo = ClassContainer.Container.Resolve<IParabolicFormula>();
         /// <summary>The linear formula for calculating grades.</summary>
-        readonly ILinearFormula linearFormulaShoo = ClassContainer.Container.Resolve<ILinearFormula>();
+        readonly IBrokenLineFormula brokenLineFormulaShoo = ClassContainer.Container.Resolve<IBrokenLineFormula>();
 
         /// <summary>Currently selected grading method, linear or parabolic.</summary>
         GradingMethodEnum gradingMethodShoo = GradingMethodEnum.Linear;
@@ -138,7 +138,7 @@ namespace GradeCalculator
 
         private void btnGeneratePdfShoo_Click(object sender, EventArgs e)
         {
-            List<GradeListItem> gradeListShoo = linearFormulaShoo.GetGradeListShoo();
+            List<GradeListItem> gradeListShoo = brokenLineFormulaShoo.GetGradeListShoo();
 
             foreach (GradeListItem gradeItem in gradeListShoo)
                 Console.WriteLine($"{ gradeItem.Grade }, {gradeItem.Points}.");
@@ -184,7 +184,7 @@ namespace GradeCalculator
             Console.WriteLine($"Remaking formulas based on: Max points: { maxPointsShoo }, ceasura: { ceasuraShoo }, grading method: { gradingMethodShoo }");
 
             //parabolicFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
-            linearFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
+            brokenLineFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
 
             // Update grade
             UpdateGradeShoo();
@@ -203,7 +203,7 @@ namespace GradeCalculator
 
             // Get grade from linear formula
             if (gradingMethodShoo == GradingMethodEnum.Linear)
-                gradeShoo = linearFormulaShoo.GetGradeShoo(pointAmountShoo);
+                gradeShoo = brokenLineFormulaShoo.GetGradeShoo(pointAmountShoo);
 
             // Get grade form parabolic formula
             else

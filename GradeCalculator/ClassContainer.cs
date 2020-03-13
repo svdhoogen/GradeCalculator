@@ -13,7 +13,7 @@ namespace GradeCalculator
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<LinearFormula>().As<ILinearFormula>();
+            builder.RegisterType<BrokenLineFormula>().As<IBrokenLineFormula>();
             builder.RegisterType<ParabolicFormula>().As<IParabolicFormula>();
 
             Container = builder.Build();

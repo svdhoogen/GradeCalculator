@@ -66,7 +66,7 @@
     <Compile Include="GradeCalculator.Designer.cs">
       <DependentUpon>GradeCalculator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\ILinearFormula.cs" />
+    <Compile Include="Interfaces\IBrokenLineFormula.cs" />
     <Compile Include="Interfaces\IParabolicFormula.cs" />
     <Compile Include="Structs\GradeListItem.cs" />
     <Compile Include="Enums\GradingMethodEnum.cs" />
