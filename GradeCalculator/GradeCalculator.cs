@@ -97,10 +97,6 @@ namespace GradeCalculator
             // Parse text box value
             float newPointAmountShoo = ParseTextBoxFloatShoo((TextBox)sender);
 
-            // Check if valid
-            if (newPointAmountShoo == 0)
-                return;
-
             // Update point amount
             pointAmountShoo = newPointAmountShoo;
 

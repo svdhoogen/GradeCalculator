@@ -51,7 +51,7 @@ namespace GradeCalculator.Services
             // Calculate formula 2's start point (b)
             startPoint2Shoo.Y = breakPointShoo.Y - multiplier2Shoo * breakPointShoo.X;
 
-            Console.WriteLine($"Succesfully remade linear formulas! Multiplier 1: { multiplier1Shoo }, multiplier 2: { multiplier2Shoo } based on max points: { endPointShoo.X }, ceasura: { breakPointShoo.X }.");
+            Console.WriteLine($"Succesfully remade broken line formulas! Multiplier 1: { multiplier1Shoo }, multiplier 2: { multiplier2Shoo }.");
         }
 
         public float GetGradeShoo(float points)

@@ -6,26 +6,26 @@ namespace GradeCalculator.Interfaces
     interface IParabolicFormula
     {
         /// <summary>
-        /// Remake.
-        /// Remakes parabolic formula based on max points and ceasure.
+        /// Remake Shoo.
+        /// Will remake the formula based on maximum points and ceasura.
         /// </summary>
-        /// <param name="maxPoints"></param>
-        /// <param name="ceasure"></param>
+        /// <param name="maxPoints">The new maximum points</param>
+        /// <param name="ceasura">The new ceasura</param>
         void RemakeShoo(float maxPoints, float ceasure);
 
         /// <summary>
         /// Get Grade Shoo.
-        /// Returns grade for certain amount of points
+        /// Returns grade at specified amount of points.
         /// </summary>
-        /// <param name="points"></param>
-        /// <returns></returns>
+        /// <param name="points">Points to get grade for</param>
+        /// <returns>Grade at points</returns>
         float GetGradeShoo(float points);
 
         /// <summary>
         /// Get Grade List Shoo.
-        /// Returns a grade list, from 1.0 till 10.0, containing the minimum points needed for a grade.
+        /// Returns a list of grades in tenths and the corresponding minimum points required
         /// </summary>
-        /// <returns>Grade list</returns>
+        /// <returns>List of grades from 1.0 to 10.0 paired with minimum points needed</returns>
         List<GradeListItem> GetGradeListShoo();
     }
 }

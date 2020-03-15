@@ -15,10 +15,10 @@ namespace GradeCalculator.Services
         Point endPointShoo = new Point(-1, 10);
 
         /// <summary>Multiplier (a) for parabolic formula.</summary>
-        float multiplier1Shoo = -1;
+        float multiplier1Shoo = -9999;
 
         /// <summary>Multiplier (b) for parabolic formula.</summary>
-        float multiplier2Shoo = -1;
+        float multiplier2Shoo = -9999;
 
         public void RemakeShoo(float maxPoints, float ceasura)
         {
@@ -30,6 +30,8 @@ namespace GradeCalculator.Services
 
             // Calculate multiplier 2 (b)
             CalculateMultiplier2Shoo();
+
+            Console.WriteLine($"Succesfully remade parabolic formula! Multiplier 1: { multiplier1Shoo }, multiplier 2: { multiplier2Shoo }.");
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace GradeCalculator.Services
         /// </summary>
         private void CalculateMultiplier1Shoo()
         {
-            // We solve this formula: a = ((y2 - c) * x3 - (y3 - c) * x2) / (x2^2 * x3 - x3^2 * x2) to determine a
+            // We solve this formula: a = ((y2 - c) * x3 - (y3 - c) * x2) / (x2^2 * x3 - x3^2 * x2)
 
             // Calculate (y2 - c) * x3
             double part1Shoo = (breakPointShoo.Y - startPointShoo.Y) * endPointShoo.X;
@@ -84,7 +86,7 @@ namespace GradeCalculator.Services
         public float GetGradeShoo(float points)
         {
             // Invalid formula, return 0
-            if (multiplier1Shoo <= 0 || multiplier2Shoo <= 0)
+            if (multiplier1Shoo <= -9000 || multiplier2Shoo <= -9000)
                 return 0;
 
             // Return grade
