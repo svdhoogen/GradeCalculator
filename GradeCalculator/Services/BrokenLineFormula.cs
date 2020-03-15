@@ -24,9 +24,9 @@ namespace GradeCalculator.Services
         public void RemakeShoo(float maxPoints, float ceasura)
         {
             // Check max points < ceasura
-            if (maxPoints < ceasura)
+            if (maxPoints <= ceasura)
             {
-                Console.WriteLine("Error: Tried to remake linear formula, but ceasure is larger than maximum points! Cancelling remake...");
+                Console.WriteLine("Error: Tried to remake linear formula, but ceasure is larger than or equal to  maximum points! Cancelling remake...");
                 multiplier1Shoo = -1;
                 multiplier2Shoo = -1;
                 return;
@@ -51,7 +51,7 @@ namespace GradeCalculator.Services
             // Calculate formula 2's start point (b)
             startPoint2Shoo.Y = breakPointShoo.Y - multiplier2Shoo * breakPointShoo.X;
 
-            Console.WriteLine($"Succesfully remade broken line formulas! Multiplier 1: { multiplier1Shoo }, multiplier 2: { multiplier2Shoo }.");
+            Console.WriteLine($"Succesfully remade broken line formulas! Multiplier 1: { multiplier1Shoo }, multiplier 2: { multiplier2Shoo } formula 2 start point: { startPoint2Shoo.Y }.");
         }
 
         public float GetGradeShoo(float points)

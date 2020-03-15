@@ -22,6 +22,31 @@ namespace GradeCalculator.Services
 
         public void RemakeShoo(float maxPoints, float ceasura)
         {
+            // Check max points < ceasura
+            if (maxPoints <= ceasura)
+            {
+                Console.WriteLine("Error: Tried to remake linear formula, but ceasure is larger than or equal to  maximum points! Cancelling remake...");
+                multiplier1Shoo = -9999;
+                multiplier2Shoo = -9999;
+                return;
+            }
+            // Check ceasura bigger than 0
+            else if (ceasura <= 0)
+            {
+                Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 0! Cancelling remake...");
+                multiplier1Shoo = -9999;
+                multiplier2Shoo = -9999;
+                return;
+            }
+            // Check parabola opening up
+            else if (ceasura < maxPoints / 2)
+            {
+                Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 0! Cancelling remake...");
+                multiplier1Shoo = -9999;
+                multiplier2Shoo = -9999;
+                return;
+            }
+
             breakPointShoo.X = ceasura;
             endPointShoo.X = maxPoints;
 
@@ -103,7 +128,7 @@ namespace GradeCalculator.Services
             List<GradeListItem> gradeListShoo = new List<GradeListItem>();
 
             // Invalid formula, return empty list
-            if (multiplier1Shoo <= 0 || multiplier2Shoo <= 0)
+            if (multiplier1Shoo <= -9000 || multiplier2Shoo <= -9000)
                 return gradeListShoo;
 
             // Fill grade list with each tenth grade's minimum needed points

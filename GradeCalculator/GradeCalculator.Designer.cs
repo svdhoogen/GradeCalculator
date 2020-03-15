@@ -104,7 +104,7 @@
             // tbxCeasuraShoo
             // 
             this.tbxCeasuraShoo.Location = new System.Drawing.Point(174, 48);
-            this.tbxCeasuraShoo.MaxLength = 6;
+            this.tbxCeasuraShoo.MaxLength = 5;
             this.tbxCeasuraShoo.Name = "tbxCeasuraShoo";
             this.tbxCeasuraShoo.Size = new System.Drawing.Size(117, 24);
             this.tbxCeasuraShoo.TabIndex = 1;
@@ -124,7 +124,7 @@
             // tbxMaxPointsShoo
             // 
             this.tbxMaxPointsShoo.Location = new System.Drawing.Point(6, 48);
-            this.tbxMaxPointsShoo.MaxLength = 6;
+            this.tbxMaxPointsShoo.MaxLength = 5;
             this.tbxMaxPointsShoo.Name = "tbxMaxPointsShoo";
             this.tbxMaxPointsShoo.Size = new System.Drawing.Size(117, 24);
             this.tbxMaxPointsShoo.TabIndex = 1;
@@ -236,7 +236,7 @@
             // tbxPointAmountShoo
             // 
             this.tbxPointAmountShoo.Location = new System.Drawing.Point(6, 66);
-            this.tbxPointAmountShoo.MaxLength = 6;
+            this.tbxPointAmountShoo.MaxLength = 5;
             this.tbxPointAmountShoo.Name = "tbxPointAmountShoo";
             this.tbxPointAmountShoo.Size = new System.Drawing.Size(117, 24);
             this.tbxPointAmountShoo.TabIndex = 1;

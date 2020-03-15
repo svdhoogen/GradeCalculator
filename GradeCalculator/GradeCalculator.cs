@@ -12,19 +12,21 @@ namespace GradeCalculator
     {
         #region Variable declarations
 
-        /// <summary>The parabolic formula for calculating grades.</summary>
-        readonly IParabolicFormula parabolicFormulaShoo = ClassContainer.Container.Resolve<IParabolicFormula>();
         /// <summary>The linear formula for calculating grades.</summary>
         readonly IBrokenLineFormula brokenLineFormulaShoo = ClassContainer.Container.Resolve<IBrokenLineFormula>();
+        /// <summary>The parabolic formula for calculating grades.</summary>
+        readonly IParabolicFormula parabolicFormulaShoo = ClassContainer.Container.Resolve<IParabolicFormula>();
+        /// <summary>Grade list pdf generator.</summary>
+        readonly IGradeListPdf gradeListPdfShoo = ClassContainer.Container.Resolve<IGradeListPdf>();
 
-        /// <summary>Currently selected grading method, linear or parabolic.</summary>
+        /// <summary>Grade calculation method, linear or parabolic.</summary>
         GradingMethodEnum gradingMethodShoo = GradingMethodEnum.Linear;
-        /// <summary>Maximum points to use for formula.</summary>
+        /// <summary>Points for a perfect score.</summary>
         float maxPointsShoo = 10;
-        /// <summary>Ceasura, this amount of points means you passed the test.</summary>
+        /// <summary>Ceasura, minimum points to pass the test.</summary>
         float ceasuraShoo = 5.5F;
 
-        /// <summary>The amount of points to calculate a grade for, based on current grading method.</summary>
+        /// <summary>Calculates grade at this amount of points.</summary>
         float pointAmountShoo = 10;
 
         #endregion
@@ -150,7 +152,13 @@ namespace GradeCalculator
             foreach (GradeListItem gradeItem in gradeListShoo)
                 Console.WriteLine($"{ gradeItem.Grade }, {gradeItem.Points}.");
 
-            GradeListPdf gradeListPdfShoo = new GradeListPdf();
+            //
+            if (gradeListShoo.Count <= 0)
+            {
+                MessageBox.Show("Failed to generate grade list pdf! Make sure you've entered a valid formula!", "Whoops!");
+                Console.WriteLine("Failed to generate grade list pdf! Grade list contains no items!");
+                return;
+            }
 
             // Create pdf from data
             gradeListPdfShoo.CreateShoo(gradeListShoo, maxPointsShoo, ceasuraShoo, gradingMethodShoo);

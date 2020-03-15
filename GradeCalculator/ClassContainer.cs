@@ -15,6 +15,7 @@ namespace GradeCalculator
 
             builder.RegisterType<BrokenLineFormula>().As<IBrokenLineFormula>();
             builder.RegisterType<ParabolicFormula>().As<IParabolicFormula>();
+            builder.RegisterType<GradeListPdf>().As<IGradeListPdf>();
 
             Container = builder.Build();
         }
