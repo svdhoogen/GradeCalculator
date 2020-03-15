@@ -136,10 +136,24 @@ namespace GradeCalculator
 
         private void btnGeneratePdfShoo_Click(object sender, EventArgs e)
         {
-            List<GradeListItem> gradeListShoo = brokenLineFormulaShoo.GetGradeListShoo();
+            // Grade list
+            List<GradeListItem> gradeListShoo;
 
+            // Get grade list from current grading method
+            if (gradingMethodShoo == GradingMethodEnum.Linear)
+                gradeListShoo = brokenLineFormulaShoo.GetGradeListShoo();
+
+            else
+                gradeListShoo = parabolicFormulaShoo.GetGradeListShoo();
+
+            // Log for debugging purposes
             foreach (GradeListItem gradeItem in gradeListShoo)
                 Console.WriteLine($"{ gradeItem.Grade }, {gradeItem.Points}.");
+
+            GradeListPdf gradeListPdfShoo = new GradeListPdf();
+
+            // Create pdf from data
+            gradeListPdfShoo.CreateShoo(gradeListShoo, maxPointsShoo, ceasuraShoo, gradingMethodShoo);
         }
 
         /// <summary>
