@@ -16,37 +16,29 @@ namespace GradeCalculator.Services
 
         /// <summary>Multiplier (a) for parabolic formula.</summary>
         float multiplier1Shoo = -9999;
-
         /// <summary>Multiplier (b) for parabolic formula.</summary>
         float multiplier2Shoo = -9999;
 
         public void RemakeShoo(float maxPoints, float ceasura)
         {
-            // Check max points < ceasura
-            if (maxPoints <= ceasura)
+            // Check for valid ceasura, ensures ascending parabola between start and end point
+            if (ceasura <= maxPoints * 0.3 || ceasura == maxPoints * 0.5 || ceasura >= maxPoints * 0.70)
             {
-                Console.WriteLine("Error: Tried to remake linear formula, but ceasure is larger than or equal to  maximum points! Cancelling remake...");
+                Console.WriteLine("Error: Tried to remake parabolic formula, but ceasure is invalid! Either smaller than maxpoints * 0.3, equal to maxpoints * 0.5 or larger than maxpoints * 0.75! Cancelling remake...");
                 multiplier1Shoo = -9999;
                 multiplier2Shoo = -9999;
                 return;
             }
-            // Check ceasura bigger than 0
-            else if (ceasura <= 0)
+            // Check ceasura bigger than 1
+            else if (ceasura <= 1)
             {
-                Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 0! Cancelling remake...");
-                multiplier1Shoo = -9999;
-                multiplier2Shoo = -9999;
-                return;
-            }
-            // Check parabola opening up
-            else if (ceasura < maxPoints / 2)
-            {
-                Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 0! Cancelling remake...");
-                multiplier1Shoo = -9999;
-                multiplier2Shoo = -9999;
+                Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 1! Cancelling remake...");
+                multiplier1Shoo = -1;
+                multiplier2Shoo = -1;
                 return;
             }
 
+            // Update points
             breakPointShoo.X = ceasura;
             endPointShoo.X = maxPoints;
 
@@ -56,62 +48,60 @@ namespace GradeCalculator.Services
             // Calculate multiplier 2 (b)
             CalculateMultiplier2Shoo();
 
-            Console.WriteLine($"Succesfully remade parabolic formula! Multiplier 1: { multiplier1Shoo }, multiplier 2: { multiplier2Shoo }.");
+            Console.WriteLine($"Succesfully remade parabolic formula! Formula is: y = { multiplier1Shoo }x^2 + {multiplier2Shoo}x + { startPointShoo.Y}.");
         }
 
         /// <summary>
         /// Calculate Multiplier 1 Shoo.
-        /// We are solving for a in parabolic formula: y = ax^2 + bx + c.
+        /// Solve for a in parabolic formula: y = ax^2 + bx + c.
         /// </summary>
         private void CalculateMultiplier1Shoo()
         {
-            // We solve this formula: a = ((y2 - c) * x3 - (y3 - c) * x2) / (x2^2 * x3 - x3^2 * x2)
+            // Solving this formula: a = ((y2 - c) * x3 - (y3 - c) * x2) / (x2^2 * x3 - x3^2 * x2)
+            // Which we simplify to: a = (operation1 - operation2) / (operation3 - operation4)
 
             // Calculate (y2 - c) * x3
-            double part1Shoo = (breakPointShoo.Y - startPointShoo.Y) * endPointShoo.X;
+            double operation1Shoo = (breakPointShoo.Y - startPointShoo.Y) * endPointShoo.X;
 
             // Calculate (y3 - c) * x2
-            double part2Shoo = (endPointShoo.Y - startPointShoo.Y) * breakPointShoo.X;
+            double operation2Shoo = (endPointShoo.Y - startPointShoo.Y) * breakPointShoo.X;
 
             // Calculate x2^2 * x3
-            double part3Shoo = (float)Math.Pow(breakPointShoo.X, 2) * endPointShoo.X;
+            double operation3Shoo = (float)Math.Pow(breakPointShoo.X, 2) * endPointShoo.X;
 
             // Calculate x3^2 * x2
-            double part4Shoo = (float)Math.Pow(endPointShoo.X, 2) * breakPointShoo.X;
-
-            // We've boiled it down to formula: a = (part1 - part2) / (part3 - part4)
+            double operation4Shoo = (float)Math.Pow(endPointShoo.X, 2) * breakPointShoo.X;
 
             // Calculate (part1 - part2) / (part3 - part4)
-            multiplier1Shoo = (float)((part1Shoo - part2Shoo) / (part3Shoo - part4Shoo));
+            multiplier1Shoo = (float)((operation1Shoo - operation2Shoo) / (operation3Shoo - operation4Shoo));
         }
 
         /// <summary>
         /// Calculate Multiplier 2 Shoo.
-        /// We are solving for b in parabolic formula: y = ax^2 + bx + c.
+        /// Solve for b in parabolic formula: y = ax^2 + bx + c.
         /// </summary>
         private void CalculateMultiplier2Shoo()
         {
-            // We solve this formula: b = (y2 - c - a * x2^2) / x2
+            // Solving this formula: b = (y2 - c - a * x2^2) / x2
+            // Which we simplify to: b = (operation1 - operation2) / operation3
 
             // Calculate y2 - c
-            double part1Shoo = breakPointShoo.Y - startPointShoo.Y;
+            double operation1Shoo = breakPointShoo.Y - startPointShoo.Y;
 
             // Calculate a * x2^2
-            double part2Shoo = multiplier1Shoo * (float)Math.Pow(breakPointShoo.X, 2);
+            double operation2Shoo = multiplier1Shoo * (float)Math.Pow(breakPointShoo.X, 2);
 
             // x2
-            double part3Shoo = breakPointShoo.X;
-
-            // We've boiled it down to formula: b = (part1 - part2) / part3
+            double operation3Shoo = breakPointShoo.X;
 
             // Calculate (part1 - part2) / part3
-            multiplier2Shoo = (float)((part1Shoo - part2Shoo) / part3Shoo);
+            multiplier2Shoo = (float)((operation1Shoo - operation2Shoo) / operation3Shoo);
         }
 
         public float GetGradeShoo(float points)
         {
             // Invalid formula, return 0
-            if (multiplier1Shoo <= -9000 || multiplier2Shoo <= -9000)
+            if (multiplier2Shoo <= -9000)
                 return 0;
 
             // Return grade
@@ -128,34 +118,34 @@ namespace GradeCalculator.Services
             List<GradeListItem> gradeListShoo = new List<GradeListItem>();
 
             // Invalid formula, return empty list
-            if (multiplier1Shoo <= -9000 || multiplier2Shoo <= -9000)
+            if (multiplier2Shoo <= -9000)
                 return gradeListShoo;
+
+            // Solve for x in formula: y = ax^2 + bx + c where y, a, b and c are known
+            // We convert this formula to: ax^2 + bx + (c - y) = 0
+            // Solve for x using formula: x = (-b + sqrt(b^2 - 4 * a * (c - y))) / (2 * a)
+            // Which we simplify to: x = (operation1 - sqrt(operation2 - operation3)) / operation4
+
+            // Calculate -b
+            float operation1Shoo = -multiplier2Shoo;
+
+            // Calculate b^2
+            double operation2Shoo = Math.Pow(multiplier2Shoo, 2);
+
+            // Calculate 2 * a
+            float operation4Shoo = 2 * multiplier1Shoo;
 
             // Fill grade list with each tenth grade's minimum needed points
             for (int indexShoo = 10; indexShoo <= 100; indexShoo++)
             {
-                float minimumPointsShoo;
-
+                // Calculate grade
                 float gradeShoo = (float)indexShoo / 10;
 
-                // We are solving formula: y = ax^2 + bx + c where y, a, b and c are known
-                // We convert to this formula: x^2 + (b / a)x + (y - c) / a = 0
-                // We write this new formula like so: x^2 + part1x + part3 = 0
-                // Then we can solve for x using formula: x = (-part1 + sqrt(part1^2 - 4 * part2)) / 4
+                // Calculate 4 * a * (c - y)
+                float operation3Shoo = 4 * multiplier1Shoo * (startPointShoo.Y - gradeShoo);
 
-                // Calculate b / a
-                float part1Shoo = multiplier2Shoo / multiplier1Shoo;
-
-                // Calculate (y - c) / a
-                float part2Shoo = (gradeShoo - startPointShoo.Y) / multiplier1Shoo;
-
-                // Calculate sqrt(part1^2 - 4 * part2)
-                float part3Shoo = (float)Math.Sqrt(Math.Pow(part1Shoo, 2) - 4 * part2Shoo);
-
-                // We've now boiled it down to (-part1 + part3) / 4
-
-                // Calculate (-part1 + part3) / 4
-                minimumPointsShoo = (-part1Shoo + part3Shoo) / 4;
+                // Calculate points
+                double minimumPointsShoo = (operation1Shoo + Math.Sqrt(operation2Shoo - operation3Shoo)) / operation4Shoo;
 
                 // Add to grade list
                 gradeListShoo.Add(new GradeListItem(gradeShoo.ToString("0.0"), minimumPointsShoo.ToString("0.0")));

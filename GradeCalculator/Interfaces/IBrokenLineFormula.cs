@@ -23,7 +23,7 @@ namespace GradeCalculator.Interfaces
 
         /// <summary>
         /// Get Grade List Shoo.
-        /// Returns a list of grades in tenths and the corresponding minimum points required
+        /// Returns a list of grades in tenths and the corresponding minimum points required.
         /// </summary>
         /// <returns>List of grades from 1.0 to 10.0 paired with minimum points needed</returns>
         List<GradeListItem> GetGradeListShoo();

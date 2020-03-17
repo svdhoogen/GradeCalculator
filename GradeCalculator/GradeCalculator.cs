@@ -55,10 +55,6 @@ namespace GradeCalculator
             // Parse text box value
             float newMaxPointsShoo = ParseTextBoxFloatShoo((TextBox)sender);
 
-            // Check if valid
-            if (newMaxPointsShoo == 0)
-                return;
-
             // Update max points
             maxPointsShoo = newMaxPointsShoo;
 
@@ -76,10 +72,6 @@ namespace GradeCalculator
         {
             // Parse text box value
             float newCeasuraShoo = ParseTextBoxFloatShoo((TextBox)sender);
-
-            // Check if valid
-            if (newCeasuraShoo == 0)
-                return;
 
             // Update ceasura
             ceasuraShoo = newCeasuraShoo;

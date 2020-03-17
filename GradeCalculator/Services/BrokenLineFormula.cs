@@ -31,10 +31,10 @@ namespace GradeCalculator.Services
                 multiplier2Shoo = -1;
                 return;
             }
-            // Check ceasura bigger than 0
-            else if (ceasura <= 0)
+            // Check ceasura bigger than 1
+            else if (ceasura <= 1)
             {
-                Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 0! Cancelling remake...");
+                Console.WriteLine("Error: Tried to remake linear formula, but ceasure smaller than or equal to 1! Cancelling remake...");
                 multiplier1Shoo = -1;
                 multiplier2Shoo = -1;
                 return;
@@ -84,8 +84,10 @@ namespace GradeCalculator.Services
             // Foreach grade, get minimum points needed and add to list
             for (int indexShoo = 10; indexShoo <= 100; indexShoo++)
             {
+                // Minimum points
                 float minimumPointsShoo;
 
+                // Calculate grade
                 float gradeShoo = (float)indexShoo / 10;
 
                 // Calculate points below ceasura
