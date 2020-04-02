@@ -7,6 +7,7 @@ using MigraDoc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace GradeCalculator
 {
@@ -23,23 +24,31 @@ namespace GradeCalculator
 
         public void CreateShoo(List<GradeListItem> gradeListShoo, float maxPointsShoo, float ceasuraShoo, GradingMethodEnum gradingMethodShoo)
         {
-            // Create pdf
-            Document pdfDocumentShoo = CreatePdfShoo();
+            try
+            {
+                // Create pdf
+                Document pdfDocumentShoo = CreatePdfShoo();
 
-            // Add section to document (page)
-            Section sectionShoo = pdfDocumentShoo.AddSection();
+                // Add section (page) to document
+                Section sectionShoo = pdfDocumentShoo.AddSection();
 
-            // Add header
-            AddHeaderShoo(sectionShoo, fileTitleShoo);
+                // Add header
+                AddHeaderShoo(sectionShoo, fileTitleShoo);
 
-            // Add grading method
-            AddGradingMethodShoo(sectionShoo, maxPointsShoo, ceasuraShoo, gradingMethodShoo);
+                // Add grading method
+                AddGradingMethodShoo(sectionShoo, maxPointsShoo, ceasuraShoo, gradingMethodShoo);
 
-            // Add grade list table
-            AddGradeListTableShoo(sectionShoo, gradeListShoo);
+                // Add grade list table
+                AddGradeListTableShoo(sectionShoo, gradeListShoo);
 
-            // Display pdf
-            DisplayPdfShoo(pdfDocumentShoo);
+                // Display pdf
+                DisplayPdfShoo(pdfDocumentShoo);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Critical error: Tried to create grade list pdf, but crashed unexpectedly! Exception: { ex }");
+                MessageBox.Show("Crashed unexpectedly while generating pdf! Make sure you've entered a valid formula!", "Whoops!");
+            }
         }
 
         /// <summary>
@@ -91,7 +100,7 @@ namespace GradeCalculator
                 "Ceasura: " + ceasuraShoo + "                            " +
                 "Grading method: " + gradingMethodShoo);
 
-            // Add empty line
+            // Add empty line (break)
             sectionShoo.AddParagraph();
         }
 
@@ -103,7 +112,7 @@ namespace GradeCalculator
         /// <param name="gradeListShoo">Grade list to fill table with</param>
         private void AddGradeListTableShoo(Section sectionShoo, List<GradeListItem> gradeListShoo)
         {
-            // Add table containing the grade list
+            // Add grade list table
             Table tableShoo = sectionShoo.AddTable();
             tableShoo.Style = "Table";
             tableShoo.Borders.Color = Color.FromRgb(0, 0, 0);
@@ -130,7 +139,7 @@ namespace GradeCalculator
             tableShoo.AddColumn();
             tableShoo.AddColumn();
 
-            // Inivible column
+            // Invisible column
             Column columnShoo = tableShoo.AddColumn("2cm");
             columnShoo.Borders.Visible = false;
 
@@ -167,7 +176,7 @@ namespace GradeCalculator
         /// <param name="gradeListShoo">Grade list to add to table</param>
         private void FillGradeListTableShoo(Table tableShoo, List<GradeListItem> gradeListShoo)
         {
-            // We loop through items in list / 2, since we add 2 items each loop
+            // We loop through # items in list / 2, since we add 2 items every loop, both to the left and right column
             int loopCountShoo = (int)Math.Ceiling(gradeListShoo.Count / 2F);
 
             // Add grade list items to table

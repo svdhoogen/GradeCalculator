@@ -11,7 +11,7 @@ namespace GradeCalculator.Enums
         /// <summary>Linear grading method, using broken point.</summary>
         Linear,
 
-        /// <summary>Parabola grading method.</summary>
+        /// <summary>Parabolic grading method.</summary>
         Parabola
     }
 }

@@ -7,7 +7,7 @@ namespace GradeCalculator.Interfaces
     {
         /// <summary>
         /// Remake Shoo.
-        /// Will remake the formula's based on maximum points and ceasura.
+        /// Will remake the formulas based on maximum points and ceasura.
         /// </summary>
         /// <param name="maxPoints">The new maximum points</param>
         /// <param name="ceasura">The new ceasura</param>

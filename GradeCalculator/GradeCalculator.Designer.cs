@@ -110,7 +110,7 @@
             this.tbxCeasuraShoo.TabIndex = 1;
             this.tbxCeasuraShoo.Text = "5.5";
             this.tbxCeasuraShoo.TextChanged += new System.EventHandler(this.tbxCeasuraShoo_TextChanged);
-            this.tbxCeasuraShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateNumericKeyPressShoo);
+            this.tbxCeasuraShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCeasuraShoo_KeyPress);
             // 
             // lblCeasuraStaticShoo
             // 
@@ -130,7 +130,7 @@
             this.tbxMaxPointsShoo.TabIndex = 1;
             this.tbxMaxPointsShoo.Text = "10";
             this.tbxMaxPointsShoo.TextChanged += new System.EventHandler(this.tbxMaxPointsShoo_TextChanged);
-            this.tbxMaxPointsShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateNumericKeyPressShoo);
+            this.tbxMaxPointsShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxMaxPointsShoo_KeyPress);
             // 
             // lblMaxPointsStaticShoo
             // 
@@ -242,7 +242,7 @@
             this.tbxPointAmountShoo.TabIndex = 1;
             this.tbxPointAmountShoo.Text = "10";
             this.tbxPointAmountShoo.TextChanged += new System.EventHandler(this.tbxPointAmountShoo_TextChanged);
-            this.tbxPointAmountShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateNumericKeyPressShoo);
+            this.tbxPointAmountShoo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxPointAmountShoo_KeyPress);
             // 
             // frmGradeCalculatorShoo
             // 

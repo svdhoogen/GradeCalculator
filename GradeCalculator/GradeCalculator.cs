@@ -12,16 +12,16 @@ namespace GradeCalculator
     {
         #region Variable declarations
 
-        /// <summary>The linear formula for calculating grades.</summary>
+        /// <summary>Broken line formula for calculating grades.</summary>
         readonly IBrokenLineFormula brokenLineFormulaShoo = ClassContainer.Container.Resolve<IBrokenLineFormula>();
-        /// <summary>The parabolic formula for calculating grades.</summary>
+        /// <summary>Parabolic formula for calculating grades.</summary>
         readonly IParabolicFormula parabolicFormulaShoo = ClassContainer.Container.Resolve<IParabolicFormula>();
         /// <summary>Grade list pdf generator.</summary>
         readonly IGradeListPdf gradeListPdfShoo = ClassContainer.Container.Resolve<IGradeListPdf>();
 
         /// <summary>Grade calculation method, linear or parabolic.</summary>
         GradingMethodEnum gradingMethodShoo = GradingMethodEnum.Linear;
-        /// <summary>Points for a perfect score.</summary>
+        /// <summary>Points needed for a perfect score.</summary>
         float maxPointsShoo = 10;
         /// <summary>Ceasura, minimum points to pass the test.</summary>
         float ceasuraShoo = 5.5F;
@@ -42,14 +42,94 @@ namespace GradeCalculator
 
         #endregion
 
-        #region UI Input events
+        #region Grade calculation logic
+
+        /// <summary>
+        /// Remake Formulas Shoo.
+        /// Remakes the formulas based on max points and ceasura.
+        /// </summary>
+        private void RemakeFormulasShoo()
+        {
+            Console.WriteLine($"Remaking formulas based on: Max points: { maxPointsShoo }, ceasura: { ceasuraShoo }, grading method: { gradingMethodShoo }");
+
+            // Remake formulas
+            brokenLineFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
+            parabolicFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
+
+            // Update grade
+            UpdateGradeShoo();
+        }
+
+        /// <summary>
+        /// Update Grade Shoo.
+        /// Updates grade based on entered point amount.
+        /// </summary>
+        private void UpdateGradeShoo()
+        {
+            // Update points label
+            lblPointsShoo.Text = pointAmountShoo.ToString();
+
+            // New grade
+            float gradeShoo;
+
+            // Get grade from current grading method
+            if (gradingMethodShoo == GradingMethodEnum.Linear)
+                gradeShoo = brokenLineFormulaShoo.GetGradeShoo(pointAmountShoo);
+
+            else
+                gradeShoo = parabolicFormulaShoo.GetGradeShoo(pointAmountShoo);
+
+            // Display new grade
+            if (gradeShoo >= 0.95 && gradeShoo <= 10.05)
+                lblGradeShoo.Text = gradeShoo.ToString("#.#");
+
+            // Invalid grade
+            else
+                lblGradeShoo.Text = "Invalid formula!";
+        }
+
+        /// <summary>
+        /// Generate Pdf Shoo.
+        /// Generates and displays pdf based on current configuration.
+        /// </summary>
+        private void GeneratePdfShoo()
+        {
+            // Grade list
+            List<GradeListItem> gradeListShoo;
+
+            // Get grade list from current grading method
+            if (gradingMethodShoo == GradingMethodEnum.Linear)
+                gradeListShoo = brokenLineFormulaShoo.GetGradeListShoo();
+
+            else
+                gradeListShoo = parabolicFormulaShoo.GetGradeListShoo();
+
+            // Log grade items in console
+            foreach (GradeListItem gradeItem in gradeListShoo)
+                Console.WriteLine($"{ gradeItem.Grade }, {gradeItem.Points}.");
+
+            // Invalid grade list
+            if (gradeListShoo.Count <= 0)
+            {
+                MessageBox.Show("Failed to generate grade list pdf! Make sure you've entered a valid formula!", "Whoops!");
+                Console.WriteLine("Failed to generate grade list pdf! Grade list contains no items!");
+                return;
+            }
+
+            // Create + display pdf from data
+            gradeListPdfShoo.CreateShoo(gradeListShoo, maxPointsShoo, ceasuraShoo, gradingMethodShoo);
+        }
+
+        #endregion
+
+        #region Input handling
 
         /// <summary>
         /// Tbx Max Points Shoo_Text Changed.
-        /// When max points changes, try getting new max points and remaking formula.
+        /// Get max points and remake formulas.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void tbxMaxPointsShoo_TextChanged(object sender, EventArgs e)
         {
             // Parse text box value
@@ -58,16 +138,16 @@ namespace GradeCalculator
             // Update max points
             maxPointsShoo = newMaxPointsShoo;
 
-            // Remake formula
+            // Remake formulas
             RemakeFormulasShoo();
         }
 
         /// <summary>
-        /// Tbx Ceasura Points Shoo_Text Changed.
-        /// When ceasura changes, try getting new ceasura and remaking formula.
+        /// Tbx Ceasura Shoo_Text Changed.
+        /// Get ceasura and remake formulas.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event sender</param>
         private void tbxCeasuraShoo_TextChanged(object sender, EventArgs e)
         {
             // Parse text box value
@@ -76,16 +156,16 @@ namespace GradeCalculator
             // Update ceasura
             ceasuraShoo = newCeasuraShoo;
 
-            // Remake formula
+            // Remake formulas
             RemakeFormulasShoo();
         }
 
         /// <summary>
         /// Tbx Point Amount Shoo_Text Changed.
-        /// When point amount changes, try getting new point amount and remaking formula.
+        /// Get point amount and update grade.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void tbxPointAmountShoo_TextChanged(object sender, EventArgs e)
         {
             // Parse text box value
@@ -99,11 +179,44 @@ namespace GradeCalculator
         }
 
         /// <summary>
-        /// Rdb Linear Shoo_Checked Changed.
-        /// Update grading method and remake formula if checked.
+        /// Tbx Max Points Shoo_Key Press.
+        /// Ensure only numeric input into text box.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Key press event args</param>
+        private void tbxMaxPointsShoo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidateNumericKeyPressShoo((TextBox)sender, e);
+        }
+
+        /// <summary>
+        /// Tbx Ceasura Shoo_Key Press.
+        /// Ensure only numeric input into text box.
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Key press event args</param>
+        private void tbxCeasuraShoo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidateNumericKeyPressShoo((TextBox)sender, e);
+        }
+
+        /// <summary>
+        /// Tbx Point Amount Shoo_Key Press.
+        /// Ensure only numeric input into text box.
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Key press event args</param>
+        private void tbxPointAmountShoo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidateNumericKeyPressShoo((TextBox)sender, e);
+        }
+
+        /// <summary>
+        /// Rdb Linear Shoo_Checked Changed.
+        /// Update grading method and remake formula.
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void rdbLinearShoo_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbLinearShoo.Checked)
@@ -115,10 +228,10 @@ namespace GradeCalculator
 
         /// <summary>
         /// Rdb Parabola Shoo_Checked Changed.
-        /// Update grading method and remake formula if checked.
+        /// Update grading method and remake formula.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void rdbParabolaShoo_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbParabolaShoo.Checked)
@@ -128,111 +241,41 @@ namespace GradeCalculator
             }
         }
 
+        /// <summary>
+        /// Btn Generate Pdf Shoo_Click.
+        /// Generate and display grade list pdf.
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void btnGeneratePdfShoo_Click(object sender, EventArgs e)
         {
-            // Grade list
-            List<GradeListItem> gradeListShoo;
-
-            // Get grade list from current grading method
-            if (gradingMethodShoo == GradingMethodEnum.Linear)
-                gradeListShoo = brokenLineFormulaShoo.GetGradeListShoo();
-
-            else
-                gradeListShoo = parabolicFormulaShoo.GetGradeListShoo();
-
-            // Log for debugging purposes
-            foreach (GradeListItem gradeItem in gradeListShoo)
-                Console.WriteLine($"{ gradeItem.Grade }, {gradeItem.Points}.");
-
-            //
-            if (gradeListShoo.Count <= 0)
-            {
-                MessageBox.Show("Failed to generate grade list pdf! Make sure you've entered a valid formula!", "Whoops!");
-                Console.WriteLine("Failed to generate grade list pdf! Grade list contains no items!");
-                return;
-            }
-
-            // Create pdf from data
-            gradeListPdfShoo.CreateShoo(gradeListShoo, maxPointsShoo, ceasuraShoo, gradingMethodShoo);
+            GeneratePdfShoo();
         }
+
+        #endregion
+
+        #region Input handling helpers
 
         /// <summary>
         /// Validate Numeric Key Press Shoo.
         /// Prevents non-numeric characters in textbox and ensures only a single decimal point.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ValidateNumericKeyPressShoo(object sender, KeyPressEventArgs e)
+        /// <param name="textBoxShoo">Text box to validate</param>
+        /// <param name="e">Key press event args</param>
+        private void ValidateNumericKeyPressShoo(TextBox textBoxShoo, KeyPressEventArgs e)
         {
-            try
-            {
-                TextBox textBoxShoo = (TextBox)sender;
-
-                // Only allow numeric input
-                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-                    e.Handled = true;
-
-                // Only allow one decimal point
-                if ((e.KeyChar == '.') && (textBoxShoo.Text.IndexOf('.') > -1))
-                    e.Handled = true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Critical error: Crashed unexpectedly while validating numeric textbox input! " + ex);
+            // Allow numeric input
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
                 e.Handled = true;
-            }
-        }
 
-        #endregion
-
-        #region Misc
-
-        /// <summary>
-        /// Remake Formulas Shoo.
-        /// Remakes the formulas based on max points and ceasura.
-        /// </summary>
-        private void RemakeFormulasShoo()
-        {
-            Console.WriteLine($"Remaking formulas based on: Max points: { maxPointsShoo }, ceasura: { ceasuraShoo }, grading method: { gradingMethodShoo }");
-
-            brokenLineFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
-            parabolicFormulaShoo.RemakeShoo(maxPointsShoo, ceasuraShoo);
-
-            // Update grade
-            UpdateGradeShoo();
-        }
-
-        /// <summary>
-        /// Update Grade Shoo.
-        /// Updates grade based on point amount.
-        /// </summary>
-        private void UpdateGradeShoo()
-        {
-            // Update points label
-            lblPointsShoo.Text = pointAmountShoo.ToString();
-
-            float gradeShoo;
-
-            // Get grade from linear formula
-            if (gradingMethodShoo == GradingMethodEnum.Linear)
-                gradeShoo = brokenLineFormulaShoo.GetGradeShoo(pointAmountShoo);
-
-            // Get grade form parabolic formula
-            else
-                gradeShoo = parabolicFormulaShoo.GetGradeShoo(pointAmountShoo);
-
-            // Set grade
-            if (gradeShoo >= 0.95 && gradeShoo <= 10.05)
-                lblGradeShoo.Text = gradeShoo.ToString("#.#");
-
-            // Invalid grade
-            else
-                lblGradeShoo.Text = "Invalid formula!";
+            // Allow single decimal point
+            if ((e.KeyChar == '.') && (textBoxShoo.Text.IndexOf('.') > -1))
+                e.Handled = true;
         }
 
         /// <summary>
         /// Parse Text Box Float Shoo.
-        /// Replaces empty text box with '0', trims trailing 0's.
+        /// Formats and returns text box input, converted to float.
         /// </summary>
         /// <param name="textBoxShoo">Text box to parse</param>
         private float ParseTextBoxFloatShoo(TextBox textBoxShoo)
@@ -254,11 +297,11 @@ namespace GradeCalculator
                     Console.WriteLine("Error: Tried to parse numeric text box float, but try parse returned 0!");
 
                 // return float
-               return parsedFloatShoo;
+                return parsedFloatShoo;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Critical error: Crashed unexpectedly while validating numeric textbox input! " + ex);
+                Console.WriteLine("Critical error: Crashed unexpectedly while parsing textbox float input! " + ex);
                 return 0;
             }
         }
@@ -267,17 +310,17 @@ namespace GradeCalculator
         /// Format Text Box Float Shoo.
         /// Replaces empty text box with '0', trims leading 0's.
         /// </summary>
-        /// <param name="textBoxShoo"></param>
+        /// <param name="textBoxShoo">Textbox to format</param>
         private void FormatTextBoxFloatShoo(TextBox textBoxShoo)
         {
-            // If textbox is empty, set it to 0 and move caret to end
+            // Set to 0 and move caret to end if textbox is empty
             if (string.IsNullOrWhiteSpace(textBoxShoo.Text))
             {
                 textBoxShoo.Text = "0";
                 textBoxShoo.SelectionStart = 1;
                 textBoxShoo.SelectionLength = 0;
             }
-            // Else if text has leading 0's and more than 1 character trim all leading 0's
+            // Trim all leading 0's
             else if (textBoxShoo.Text[0] == '0' && textBoxShoo.Text.Length > 1)
             {
                 textBoxShoo.Text = textBoxShoo.Text.TrimStart('0');

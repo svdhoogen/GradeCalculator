@@ -12,8 +12,8 @@
         /// Point.
         /// Constructor for point.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">Point's x value</param>
+        /// <param name="y">Point's y value</param>
         public Point(float x, float y)
         {
             X = x;
